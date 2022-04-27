@@ -1,0 +1,48 @@
+<h1 style="text-align: center;">CSV Upload</h1>
+
+
+<div class="container">
+  <form action="/add-csv" method="post" enctype="multipart/form-data">
+    <div class="form-group row">
+      <div class="col-xs-3">
+
+        <input type="file" name="file" required>
+      </div>
+      <div class="col-xs-1">
+
+        <input type="submit" value="Upload">
+      </div>
+    </div>
+  </form>
+</div>
+
+<br><br>
+
+<h1 style="text-align: center;">List of CSV Files</h1>
+
+<% if(files.length===0 ){ %>
+  <p class="text-center">No csv files uploaded yet.</p>
+  <% }else{ %>
+    <div class="secondary-nav-container container">
+      <div class="row">
+        <ul class="list-group">
+          <% files.forEach((file)=> {%>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-xs-1">
+                  <a href="/filedata/?id=<%= file._id %>">
+                    <%= file.fileName %>
+                  </a>
+                </div>
+                <div class="col-xs-9"></div>
+                <div class="col-xs-2">
+                  <a href="/delete/?id=<%= file._id %>"><i class="bi bi-trash"></i></a>
+                </div>
+              </div>
+            </li>
+            <% }) %>
+
+        </ul>
+      </div>
+    </div>
+    <% } %>

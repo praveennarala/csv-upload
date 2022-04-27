@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <title>File : <%= title %>
+  </title>
+</head>
+
+<body>
+  <div class="file">
+    <div>
+      <a href="/">Back</a>
+    </div>
+    <br>
+    <div id="search-box">
+
+      <input type="text" name="search" onkeyup="myFunction()" id="search" placeholder="Search..."></input>
+
+
+    </div>
+
+    <br>
+    <table id="table" border="1">
+
+      <tr>
+        <% for(let i=0; i<head.length; i++){ %>
+          <th>
+            <%= head[i] %>
+          </th>
+          <% } %>
+      </tr>
+
+      <% for(let i=0; i<data.length; i++){ %>
+        <tr class="trdata">
+          <% for(let j=0; j<head.length; j++){ %>
+            <td class="tdata">
+              <%= data[i][head[j]] %>
+            </td>
+
+            <% } %>
+        </tr>
+        <% } %>
+
+    </table>
+
+  </div>
+  <script>
+
+    function myFunction() {
+      var input, filter, found, table, tr, td, i, j;
+      input = document.getElementById("search");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("table");
+      // tr = table.getElementsByTagName("tr");
+      tr = table.querySelectorAll('.trdata');
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td");
+        for (j = 0; j < td.length; j++) {
+          if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+            found = true;
+          }
+        }
+        if (found) {
+          tr[i].style.display = "";
+          found = false;
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+
+  </script>
+</body>
+
+</html>
